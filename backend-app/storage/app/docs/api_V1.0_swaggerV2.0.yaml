@@ -1,0 +1,635 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: Csattos Zsolt - Arukereső teszt
+  description: Test ordering microservice application powered by Laravel framework
+  contact:
+    email: zcsattos@loginet.hu
+    name: Zsolt Csattos
+    url: https://www.loginet.hu
+host: 0.0.0.0
+basePath: /
+securityDefinitions: {}
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api/user/list:
+    get:
+      summary: All users list
+      tags:
+        - User aware endpoints
+      operationId: Alluserslist
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/userlist'
+          examples:
+            application/json:
+              data:
+                - id: 1
+                  name: Dangelo Wintheiser
+                  email: esther.feeney@example.net
+                - id: 2
+                  name: Alvis Berge
+                  email: douglas.margarita@example.org
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:27:29 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '59'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+      security: []
+  /api/me:
+    get:
+      summary: Me
+      tags:
+        - User aware endpoints
+      operationId: Me
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/me'
+          examples:
+            application/json:
+              data:
+                id: 1
+                name: Dangelo Wintheiser
+                email: esther.feeney@example.net
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:27:36 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '59'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+  /api/auth:
+    post:
+      summary: User auth
+      tags:
+        - Authentication
+      operationId: Userauth
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/userauthrequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+          examples:
+            application/json:
+              - 6|5HhjdeKM37zgIOEsT57oLm6b3yJcE2EvZ4r1aIcY
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:27:54 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '58'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+      security: []
+  /api/logout:
+    post:
+      summary: User logout
+      tags:
+        - Authentication
+      operationId: Userlogout
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/userlogoutrequest'
+      responses:
+        default:
+          description: ''
+          headers: {}
+  /api/order/store:
+    post:
+      summary: Order store
+      tags:
+        - Order aware endpoints
+      operationId: Orderstore
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/orderstorerequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+          examples:
+            application/json:
+              - 11
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:28:02 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '58'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+  /api/order/modify/12:
+    post:
+      summary: Order modify
+      tags:
+        - Order aware endpoints
+      operationId: Ordermodify
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/ordermodifyrequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+          examples:
+            application/json:
+              - 12
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:29:30 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '56'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+  /api/order/list:
+    post:
+      summary: Order list
+      tags:
+        - Order aware endpoints
+      operationId: Orderlist
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            example: {}
+            type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/orderlist'
+          headers:
+            Server:
+              type: string
+              default: nginx
+            Transfer-Encoding:
+              type: string
+              default: chunked
+            Connection:
+              type: string
+              default: keep-alive
+            X-Powered-By:
+              type: string
+              default: PHP/7.4.23
+            Cache-Control:
+              type: string
+              default: no-cache, private
+            Date:
+              type: string
+              default: Thu, 09 Sep 2021 14:29:36 GMT
+            X-RateLimit-Limit:
+              type: string
+              default: '60'
+            X-RateLimit-Remaining:
+              type: string
+              default: '55'
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            X-Frame-Options:
+              type: string
+              default: SAMEORIGIN
+definitions:
+  userlist:
+    title: userlist
+    example:
+      data:
+        - id: 1
+          name: Dangelo Wintheiser
+          email: esther.feeney@example.net
+        - id: 2
+          name: Alvis Berge
+          email: douglas.margarita@example.org
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/user-list-item-data'
+    required:
+      - data
+  user-list-item-data:
+    title: user-list-item-data
+    example:
+      id: 1
+      name: Dangelo Wintheiser
+      email: esther.feeney@example.net
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      email:
+        type: string
+    required:
+      - id
+      - name
+      - email
+  me:
+    title: me
+    example:
+      data:
+        id: 1
+        name: Dangelo Wintheiser
+        email: esther.feeney@example.net
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/me-data'
+    required:
+      - data
+  me-data:
+    title: me-data
+    example:
+      id: 1
+      name: Dangelo Wintheiser
+      email: esther.feeney@example.net
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+      email:
+        type: string
+    required:
+      - id
+      - name
+      - email
+  userauthrequest:
+    title: userauthrequest
+    example:
+      email: esther.feeney@example.net
+      password: password
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+  orderstorerequest:
+    title: orderstorerequest
+    example:
+      customerName: Csattos Zsolt
+      customerEmail: csattoszsolt@gmail.com
+      billingAddress:
+        city: Budapest
+        postcode: '1033'
+        address: Hévízi út 5/A 1/4
+      deliveryMode: personal
+      items:
+        - productId: 1
+          quantity: 1
+        - productId: 2
+          quantity: 3
+    type: object
+    properties:
+      customerName:
+        type: string
+      customerEmail:
+        type: string
+      billingAddress:
+        $ref: '#/definitions/billing-address-data'
+      deliveryMode:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/cart-item'
+    required:
+      - customerName
+      - customerEmail
+      - billingAddress
+      - deliveryMode
+      - items
+  billing-address-data:
+    title: billing-address-data
+    example:
+      city: Budapest
+      postcode: '1033'
+      address: Hévízi út 5/A 1/4
+    type: object
+    properties:
+      city:
+        type: string
+      postcode:
+        type: string
+      address:
+        type: string
+    required:
+      - city
+      - postcode
+      - address
+  cart-item:
+    title: cart-item
+    example:
+      productId: 1
+      quantity: 1
+    type: object
+    properties:
+      productId:
+        type: integer
+        format: int32
+      quantity:
+        type: integer
+        format: int32
+    required:
+      - productId
+      - quantity
+  ordermodifyrequest:
+    title: ordermodifyrequest
+    example:
+      orderStatus: completed
+    type: object
+    properties:
+      orderStatus:
+        type: string
+    required:
+      - orderStatus
+  orderlist:
+    title: orderlist
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/order-list-item-data'
+    required:
+      - data
+  order-list-item-data:
+    title: order-list-item-data
+    example:
+      id: 1
+      orderStatus: completed
+      customerName: Csattos Zsolt
+      createdAt: '2021-09-09 09:38:13'
+      totalPrice: 10126980
+      currency: huf
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      orderStatus:
+        type: string
+      customerName:
+        type: string
+      createdAt:
+        type: string
+      totalPrice:
+        type: integer
+        format: int32
+      currency:
+        type: string
+    required:
+      - id
+      - orderStatus
+      - customerName
+      - createdAt
+      - totalPrice
+      - currency
+  userlogoutrequest:
+    title: userlogoutrequest
+    example:
+      email: donnelly.peyton@example.net
+      password: password
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+tags:
+  - name: User aware endpoints
+    description: ''
+  - name: Authentication
+    description: ''
+  - name: Order aware endpoints
+    description: ''
