@@ -1,0 +1,58 @@
+version: '2'
+
+volumes:
+  database-data:
+    driver: local
+
+networks:
+  arukereso-app:
+    driver: bridge
+
+services:
+
+  php:
+    tty: true # Enables debugging capabilities when attached to this container.
+#    image: ${DOCKER_IMAGE_PHP_FPM}
+    build:
+      context: ./backend-app
+      dockerfile: Dockerfile
+      target: php-base
+      args:
+        DOCKER_IMAGE_PHP_FPM: ${DOCKER_IMAGE_PHP_FPM}
+    ports:
+      - 9000:9000
+    env_file:
+      - .env
+    networks:
+      - arukereso-app
+    depends_on:
+      - db
+    volumes:
+      - ./backend-app:/app
+      - ./assets/config/php/app.ini:/opt/bitnami/php/etc/conf.d/app.ini:ro
+
+  nginx:
+    image: ${DOCKER_IMAGE_NGINX}
+    ports:
+      - 80:8080
+    volumes:
+      - ./backend-app/public:/app/public
+      - ./assets/config/nginx/server_blocks:/opt/bitnami/nginx/conf/server_blocks:ro
+    depends_on:
+      - php
+    env_file:
+      - .env
+    networks:
+      - arukereso-app
+
+  db:
+    image: ${DOCKER_IMAGE_DB}
+    volumes:
+      - database-data:/bitnami/mariadb
+      - ./assets/config/database/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:rw
+    ports:
+      - 3307:3306
+    env_file:
+      - .env
+    networks:
+      - arukereso-app
