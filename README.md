@@ -5,7 +5,7 @@
 ### Clone from GIT repository
 
 ```bash
-> git clone git clone git@github.com:PokiPlayer/arukereso.git . 
+> git clone git@github.com:PokiPlayer/arukereso.git . 
 ```
 
 ### Setup backend application
